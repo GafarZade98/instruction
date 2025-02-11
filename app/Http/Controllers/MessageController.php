@@ -22,7 +22,7 @@ class MessageController extends Controller
         ]);
 
 //        broadcast(new MessageSent($message))->toOthers();
-        MessageSent::dispatch($message);
+        MessageSent::dispatch($message->load('user'));
         return response()->json($message, 201);
     }
 }

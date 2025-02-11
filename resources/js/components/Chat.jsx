@@ -19,6 +19,7 @@ export default function Chat() {
         setMessages(data);
     };
 
+
     const sendMessage = async () => {
         await axios.post('/messages', { message });
         setMessage('');

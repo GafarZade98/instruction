@@ -4,8 +4,8 @@
  * building robust, powerful web applications using React + Laravel.
  */
 
-import './bootstrap';
-import './echo.js';
+import "./bootstrap";
+import "./echo.js";
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -13,11 +13,12 @@ import './echo.js';
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import Chat from './components/Chat';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import Chat from "./components/ChatPage/Chat.jsx";
+import "../scss/app.scss";
 
-if (document.getElementById('chat')) {
-    const root = ReactDOM.createRoot(document.getElementById('chat'));
+if (document.getElementById("chat")) {
+    const root = ReactDOM.createRoot(document.getElementById("chat"));
     root.render(<Chat />);
 }

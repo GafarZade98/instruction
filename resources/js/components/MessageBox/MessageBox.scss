@@ -1,0 +1,46 @@
+.message_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 15px;
+
+    .contact_avatar {
+        width: 40px;
+        height: 40px;
+        align-self: flex-end;
+    }
+
+    .message_box {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 5px;
+        .sent_time {
+            font-size: 10px;
+            width: fit-content;
+        }
+        .message_content {
+            background-color: #11050f;
+            width: fit-content;
+            padding: 10px;
+            border-radius: var(--border-radius-sm);
+            font-size: var(--font-size-sm);
+        }
+    }
+
+    &.received {
+        flex-direction: row;
+
+        .sent_time {
+            align-self: flex-start;
+        }
+    }
+
+    &.sent {
+        flex-direction: row-reverse;
+
+        .sent_time {
+            align-self: flex-end;
+        }
+    }
+}

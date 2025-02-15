@@ -11,7 +11,7 @@ class MessageController extends Controller
 {
     public function index()
     {
-        return Message::with('user')->latest()->take(10)->get();
+        return Message::with('user')->latest()->get();
     }
 
     public function store(Request $request)

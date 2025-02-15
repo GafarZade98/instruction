@@ -1,0 +1,49 @@
+.layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--color-secondary-light);
+        height: 40px;
+        border-radius: var(--border-radius-sm);
+    }
+
+    ::-webkit-scrollbar-track {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .container {
+        max-width: 1100px;
+        width: 90%;
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    .main {
+        width: 900px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        height: 100vh;
+        max-height: 500px;
+        overflow-y: hidden;
+        padding: 20px;
+        margin-bottom: 10px;
+
+        .messages_list {
+            overflow-y: scroll;
+            flex: 1 1 100%;
+            order: 1;
+        }
+    }
+}

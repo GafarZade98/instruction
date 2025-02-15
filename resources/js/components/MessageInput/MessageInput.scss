@@ -1,0 +1,28 @@
+.form_group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    order: 2;
+
+    .input_wrapper {
+        border-radius: var(--border-radius-sm);
+        border: 1px solid #52454d;
+        height: 40px;
+        width: 100%;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        padding: 5px;
+
+        .input {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            font-weight: 400;
+            font-size: var(--font-size-sm);
+            line-height: 30px;
+            padding-left: 10px;
+            color: #ffffff;
+        }
+    }
+}

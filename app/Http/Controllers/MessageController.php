@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Events\MessageSent;
 use App\Models\Message;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -19,9 +18,9 @@ class MessageController extends Controller
         $message = auth()->user()->messages()->create([
             'message' => $request->input('message'),
             'user_id' => auth()->id(),
+            'target_id' => $request->get('target_id'),
         ]);
 
-//        broadcast(new MessageSent($message))->toOthers();
         MessageSent::dispatch($message->load('user'));
         return response()->json($message, 201);
     }

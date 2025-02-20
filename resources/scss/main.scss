@@ -1,0 +1,77 @@
+:root {
+    //Primary Colors
+    --color-primary: #211521;
+    --color-primary-dark: #1e111e;
+
+    //Secondary Colors
+    --color-secondary: #e09e54;
+    --color-secondary-light: #bba787;
+
+    //Font
+    --font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    --font-size-sm: 13px;
+    --font-size-md: 15px;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+
+    // Border Radius
+    --border-radius-sm: 5px;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+input,
+button {
+    all: unset;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #ffffff;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px #23232329;
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--color-primary);
+    color: var(--color-secondary-light);
+    font-family: var(--font-family);
+}
+
+%heading {
+    font-family: var(--font-family);
+    font-weight: bold;
+    color: var(--color-secondary-light);
+    line-height: 1.2;
+}
+
+.h1 {
+    @extend %heading;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.logo_container {
+    background-color: #bba7875b;
+    width: 50px;
+    height: 50px;
+    border-radius: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+}

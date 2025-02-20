@@ -9,7 +9,7 @@ const MessageInput = () => {
     const sendMessage = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("/messages", { message, target_id });
+            await axios.post("/messages", { message });
             setMessage("");
         } catch (error) {
             console.log("Error while sending message:", error);

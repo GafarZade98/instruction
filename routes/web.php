@@ -17,5 +17,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/messages', [MessageController::class, 'index']);
     Route::post('/messages', [MessageController::class, 'store']);
     Route::get('/userMessages', [UserController::class, 'userMessages'])->name('userMessages');
-    Route::get('/users', [UserController::class])->name('message.users');
+    Route::get('/users', [UserController::class, 'index'])->name('message.users');
 });

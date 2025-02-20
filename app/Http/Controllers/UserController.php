@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function __construct()
+    public function index()
     {
-        return response()->json('users', User::with('messages')->get());
+        return response()->json(['users' => User::with('messages')->get()]);
     }
 
     public function userMessages(Request $request)
     {
+        dd(auth()->user()->messages());
         return auth()->user()->messages()->where('target_id', $request->get('target_id'))->get();
     }
 }

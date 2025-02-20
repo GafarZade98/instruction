@@ -6,7 +6,7 @@ const Navbar = () => {
     return (
         <div className={"navbar_custom"}>
             <div className={"nav_left"}>
-                <Users color={"var(--color-secondary-light)"} size={20} />
+                <Users color={"var(--color-primary)"} size={20} />
                 <p>Contacts</p>
             </div>
             <div className={"nav_right"}>

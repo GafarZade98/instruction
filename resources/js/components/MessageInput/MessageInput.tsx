@@ -35,7 +35,7 @@ const MessageInput = () => {
             >
                 <Send
                     size={22}
-                    color={message ? "var(--color-secondary-light)" : "#44383D"}
+                    color={message ? "var(--color-primary)" : "#44383D"}
                 />
             </button>
         </form>

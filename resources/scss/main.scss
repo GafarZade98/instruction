@@ -1,11 +1,13 @@
+$bg_image: "../../public/background.svg";
+
 :root {
     //Primary Colors
-    --color-primary: #211521;
+    --color-primary: #ff2c1f;
     --color-primary-dark: #1e111e;
 
     //Secondary Colors
-    --color-secondary: #e09e54;
-    --color-secondary-light: #bba787;
+    --color-secondary: #17171a;
+    --color-secondary-light: #a1a1aa;
 
     //Font
     --font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -47,7 +49,10 @@ input:-webkit-autofill:active {
 
 body {
     min-height: 100vh;
-    background-color: var(--color-primary);
+    background-color: var(--color-secondary);
+    background-image: url($bg_image);
+    background-repeat: no-repeat;
+    background-size: cover;
     color: var(--color-secondary-light);
     font-family: var(--font-family);
 }

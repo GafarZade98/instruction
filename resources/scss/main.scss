@@ -13,6 +13,7 @@ $bg_image: "../../public/background.svg";
     --font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     --font-size-sm: 13px;
     --font-size-md: 15px;
+    --font-size-lg: 20px;
     --font-weight-normal: 400;
     --font-weight-medium: 500;
     --font-weight-bold: 700;
@@ -68,15 +69,4 @@ body {
     @extend %heading;
     font-size: 24px;
     margin-bottom: 10px;
-}
-
-.logo_container {
-    background-color: #bba7875b;
-    width: 50px;
-    height: 50px;
-    border-radius: 13px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 25px;
 }

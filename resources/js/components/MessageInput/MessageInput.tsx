@@ -2,14 +2,19 @@ import React, { useState } from "react";
 import "./MessageInput.scss";
 import axios from "axios";
 import { Send } from "lucide-react";
+import { useReceiverUserState } from "../../states/user.state";
 
 const MessageInput = () => {
     const [message, setMessage] = useState("");
+    const { receiverUserId } = useReceiverUserState();
 
     const sendMessage = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("/messages", { message });
+            await axios.post("/messages", {
+                message,
+                target_id: receiverUserId,
+            });
             setMessage("");
         } catch (error) {
             console.log("Error while sending message:", error);

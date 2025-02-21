@@ -16,7 +16,13 @@ const MessageBox = ({ isSent, isReceived, time, message, name }: any) => {
                 ["received"]: isReceived,
             })}
         >
-            <img src={"https://avatar.iran.liara.run/public/boy?username=" + name} alt="avatar" className={"contact_avatar"} />
+            <img
+                src={
+                    "https://avatar.iran.liara.run/public/boy?username=" + name
+                }
+                alt="avatar"
+                className={"contact_avatar"}
+            />
             <div className={"message_box"}>
                 <div className={"sent_time"}>{formattedTime}</div>
                 <p className={"message_content"}>{message}</p>

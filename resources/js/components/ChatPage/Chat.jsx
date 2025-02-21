@@ -49,6 +49,7 @@ export default function Chat() {
                                         isSent={msg.user.id === 2}
                                         isReceived={msg.user.id === 1}
                                         key={msg.id}
+                                        name={msg.user.name}
                                         message={msg.message}
                                         time={msg.created_at}
                                     />

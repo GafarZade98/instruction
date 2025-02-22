@@ -10,11 +10,15 @@ class UserController extends Controller
 {
     public function index()
     {
-        return response()->json(['users' => User::with('messages')->get()]);
+        return response()->json([
+            'users' => User::with('messages')->whereNot('id', auth()->id())->get()
+        ]);
     }
 
     public function userMessages(Request $request)
     {
-        return response()->json(['messages' => Message::where('user_id', auth()->id())->where('target_id', $request->only('target_id'))->get()]);
+        return response()->json([
+            'messages' => auth()->user()->messages()->where('target_id', $request->only('target_id'))->get()
+        ]);
     }
 }

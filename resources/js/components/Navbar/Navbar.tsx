@@ -22,7 +22,7 @@ const Navbar = () => {
                         alt="avatar"
                         className={"contact_avatar"}
                     />
-                    <div className={"contact_name"}>Fidan Ismayilova</div>
+                    <div className={"contact_name"}>{receiverUserName}</div>
                 </div>
             )}
         </div>

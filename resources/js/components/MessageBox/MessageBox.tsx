@@ -2,7 +2,7 @@ import React from "react";
 import "./MessageBox.scss";
 import cn from "classnames";
 
-const MessageBox = ({ isSent, isReceived, time, message, name }: any) => {
+const MessageBox = ({ isSent, time, message, name }: any) => {
     const date = new Date(time);
 
     const hours = date.getHours().toString().padStart(2, "0");
@@ -13,7 +13,7 @@ const MessageBox = ({ isSent, isReceived, time, message, name }: any) => {
         <div
             className={cn("message_wrapper", {
                 ["sent"]: isSent,
-                ["received"]: isReceived,
+                ["received"]: !isSent,
             })}
         >
             <img

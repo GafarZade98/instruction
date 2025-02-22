@@ -13,3 +13,10 @@ export const useReceiverUserState = create<UserStateType>((set) => ({
     setReceiverUserId: (val) => set({ receiverUserId: val }),
     setReceiverUserName: (val) => set({ receiverUserName: val }),
 }));
+
+export const useMessagesState = create((set) => ({
+    messages: [],
+    setMessage: (val) =>
+        set((state) => ({ messages: [val, ...state.messages] })),
+    setMessages: (val) => set({ messages: val }),
+}));

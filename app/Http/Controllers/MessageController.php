@@ -10,13 +10,17 @@ class MessageController extends Controller
 {
     public function index()
     {
-        return Message::with('user')->latest()->get();
+        return Message::with('user')
+            ->where('user_id', auth()->id())
+            ->orWhere('target_id', auth()->id())
+            ->latest()
+            ->get();
     }
 
     public function store(Request $request)
     {
         $message = $request->user()->messages()->create([
-            'message' => $request->input('message'),
+            'message' => strip_tags($request->input('message')),
             'user_id' => auth()->id(),
             'target_id' => $request->get('target_id'),
         ]);

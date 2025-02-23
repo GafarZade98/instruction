@@ -8,7 +8,6 @@ const Sidebar = () => {
     const [usersList, setUsersList] = useState([]);
     const { setReceiverUserId, setReceiverUserName } = useReceiverUserState();
 
-    //FIX: exclude logged in user
     const handleFetchUsers = async () => {
         try {
             const { data } = await axios.get("/users");
@@ -19,15 +18,9 @@ const Sidebar = () => {
         }
     };
 
-    const handleGetMessages = async (id, name) => {
+    const handleGetMessages = (id, name) => {
         setReceiverUserId(id);
         setReceiverUserName(name);
-        try {
-            const { data } = await axios.get(`/userMessages?target_id=${id}`);
-            console.log(data, "get messages");
-        } catch (error) {
-            console.log("Error while fetching messages for user:", error);
-        }
     };
 
     useEffect(() => {

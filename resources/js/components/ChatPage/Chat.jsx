@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import axios from "axios";
 import Sidebar from "../Sidebar/Sidebar";
 import MessageBox from "../MessageBox/MessageBox";
@@ -6,30 +6,38 @@ import Navbar from "../Navbar/Navbar";
 import "./ChatPage.scss";
 import MessageInput from "../MessageInput/MessageInput";
 import NoChatSelected from "../NoChatSelected/NoChatSelected";
-import { useReceiverUserState } from "../../states/user.state";
+import {
+    useMessagesState,
+    useReceiverUserState,
+} from "../../states/user.state";
 
 export default function Chat() {
-    const [messages, setMessages] = useState([]);
-    const messagesEndRef = useRef(null);
+    const { messages, setMessages, setMessage } = useMessagesState();
     const { receiverUserId } = useReceiverUserState();
+    const messagesEndRef = useRef(null);
 
     useEffect(() => {
-        fetchMessages();
         window.Echo.channel("chat").listen("MessageSent", (e) => {
-            setMessages((prev) => [e.message, ...prev]);
+            setMessage(e.message);
         });
     }, []);
 
-    //FIX: i dont need all messages. i need to get messages when i click the contact from Sidebar
-    const fetchMessages = async () => {
+    useEffect(() => {
+        if (receiverUserId) {
+            handleGetMessages(receiverUserId);
+        }
+    }, [receiverUserId]);
+
+    const handleGetMessages = async (id) => {
         try {
-            const { data } = await axios.get("/messages");
-            console.log(data, "messages");
-            setMessages(data);
+            const { data } = await axios.get(`/userMessages?target_id=${id}`);
+            setMessages(data.messages);
         } catch (error) {
-            console.log("Error while fetching messages:", error);
+            console.log("Error while fetching messages for user:", error);
         }
     };
+
+    console.log(messages, "messages");
 
     useEffect(() => {
         // Scroll to the bottom when messages update
@@ -47,17 +55,18 @@ export default function Chat() {
                         {receiverUserId ? (
                             <div className={"messages_list"}>
                                 {messages
-                                    .filter((msg) => msg.user && msg.user.name)
                                     .sort((a, b) => a.id - b.id)
                                     .map((msg) => (
                                         // FIXME: way to identify which is me and and who is receiver
                                         <MessageBox
-                                            isSent={msg.user.id === msg.user_id}
-                                            isReceived={
-                                                msg.user.id === msg.target_id
+                                            isSent={
+                                                msg.user_id !== receiverUserId
                                             }
+                                            // isReceived={
+                                            //     msg.target_id === receiverUserId
+                                            // }
                                             key={msg.id}
-                                            name={msg.user.name}
+                                            // name={msg.user.name}
                                             message={msg.message}
                                             time={msg.created_at}
                                         />
@@ -68,7 +77,7 @@ export default function Chat() {
                             <NoChatSelected />
                         )}
 
-                        <MessageInput />
+                        {receiverUserId && <MessageInput />}
                     </div>
                 </div>
             </div>

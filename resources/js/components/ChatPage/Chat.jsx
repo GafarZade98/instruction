@@ -14,35 +14,38 @@ import {
 export default function Chat() {
     const { messages, setMessages, setMessage } = useMessagesState();
     const { receiverUserId } = useReceiverUserState();
-    const [userInfo, setUserInfo] = React.useState(null);
 
     const messagesEndRef = useRef(null);
 
-
     useEffect(() => {
-        window.Echo.channel("chat").listen("MessageSent", (e) => {
-            setMessage(e.message);
+        if (!receiverUserId) return; // Ensure a chat is selected
+
+        const channel = window.Echo.channel("chat");
+
+        channel.listen("MessageSent", (e) => {
+            if (
+                e.message.target_id === receiverUserId || // Incoming message to me
+                e.message.user_id === receiverUserId // Outgoing message from me
+            ) {
+                setMessage(e.message);
+            }
         });
-    }, []);
+    }, [receiverUserId]);
 
     useEffect(() => {
         if (receiverUserId) {
             handleGetMessages(receiverUserId);
         }
-    }, [receiverUserId]);
+    }, [receiverUserId, messages.length]);
 
     const handleGetMessages = async (id) => {
         try {
             const { data } = await axios.get(`/userMessages?target_id=${id}`);
             setMessages(data.messages);
-            setUserInfo(data.user);
         } catch (error) {
             console.log("Error while fetching messages for user:", error);
         }
     };
-
-    console.log(messages, "messages");
-    console.log(userInfo, "user");
 
     useEffect(() => {
         // Scroll to the bottom when messages update
@@ -62,16 +65,12 @@ export default function Chat() {
                                 {messages
                                     .sort((a, b) => a.id - b.id)
                                     .map((msg) => (
-                                        // FIXME: way to identify which is me and and who is receiver
                                         <MessageBox
                                             isSent={
                                                 msg.user_id !== receiverUserId
                                             }
-                                            // isReceived={
-                                            //     msg.target_id === receiverUserId
-                                            // }
                                             key={msg.id}
-                                            name={userInfo?.name}
+                                            user_id={msg.user_id}
                                             message={msg.message}
                                             time={msg.created_at}
                                         />

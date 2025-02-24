@@ -4,7 +4,7 @@ import "./Navbar.scss";
 import { useReceiverUserState } from "../../states/user.state";
 
 const Navbar = () => {
-    const { receiverUserName } = useReceiverUserState();
+    const { receiverUserName, receiverUserId } = useReceiverUserState();
 
     return (
         <div className={"navbar_custom"}>
@@ -16,8 +16,8 @@ const Navbar = () => {
                 <div className={"nav_right"}>
                     <img
                         src={
-                            "https://avatar.iran.liara.run/public/boy?username=" +
-                            receiverUserName
+                            "https://avatar.iran.liara.run/public/" +
+                            receiverUserId
                         }
                         alt="avatar"
                         className={"contact_avatar"}

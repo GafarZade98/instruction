@@ -11,7 +11,6 @@ const Sidebar = () => {
     const handleFetchUsers = async () => {
         try {
             const { data } = await axios.get("/users");
-            console.log(data, "get users");
             setUsersList((prev) => data.users);
         } catch (error) {
             console.log("Error while fetching users:", error);
@@ -29,13 +28,13 @@ const Sidebar = () => {
 
     return (
         <div className={"sidebar"}>
-            {usersList.map((user) => {
+            {usersList.map((user: any) => {
                 return (
                     <div
                         key={user.id}
                         onClick={() => handleGetMessages(user.id, user.name)}
                     >
-                        <ContactItem name={user.name} />
+                        <ContactItem user_id={user.id} name={user.name} />
                     </div>
                 );
             })}

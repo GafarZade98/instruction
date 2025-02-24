@@ -6,6 +6,11 @@ type UserStateType = {
     setReceiverUserId: (val: number) => void;
     setReceiverUserName: (val: string) => void;
 };
+type useMessagesStateType = {
+    messages: any[];
+    setMessage: (val: any) => void;
+    setMessages: (val: any) => void;
+};
 
 export const useReceiverUserState = create<UserStateType>((set) => ({
     receiverUserId: null,
@@ -14,7 +19,7 @@ export const useReceiverUserState = create<UserStateType>((set) => ({
     setReceiverUserName: (val) => set({ receiverUserName: val }),
 }));
 
-export const useMessagesState = create((set) => ({
+export const useMessagesState = create<useMessagesStateType>((set) => ({
     messages: [],
     setMessage: (val) =>
         set((state) => ({ messages: [val, ...state.messages] })),

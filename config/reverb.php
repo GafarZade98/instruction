@@ -14,10 +14,10 @@ return [
     */
 
     'default' => env('REVERB_SERVER', 'reverb'),
-    'logging' => [
-        'enabled' => true,
-        'level' => 'debug',
-    ],
+//    'logging' => [
+//        'enabled' => true,
+//        'level' => 'debug',
+//    ],
 
     /*
     |--------------------------------------------------------------------------

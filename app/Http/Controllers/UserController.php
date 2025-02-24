@@ -29,7 +29,7 @@ class UserController extends Controller
                         });
                 })
                 ->get(),
-            'user' => User::where('id', $target_id)->get()
+            'user' => User::where('id', $target_id)->first()
         ]);
     }
 }

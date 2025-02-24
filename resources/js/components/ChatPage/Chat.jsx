@@ -14,7 +14,10 @@ import {
 export default function Chat() {
     const { messages, setMessages, setMessage } = useMessagesState();
     const { receiverUserId } = useReceiverUserState();
+    const [userInfo, setUserInfo] = React.useState(null);
+
     const messagesEndRef = useRef(null);
+
 
     useEffect(() => {
         window.Echo.channel("chat").listen("MessageSent", (e) => {
@@ -32,12 +35,14 @@ export default function Chat() {
         try {
             const { data } = await axios.get(`/userMessages?target_id=${id}`);
             setMessages(data.messages);
+            setUserInfo(data.user);
         } catch (error) {
             console.log("Error while fetching messages for user:", error);
         }
     };
 
     console.log(messages, "messages");
+    console.log(userInfo, "user");
 
     useEffect(() => {
         // Scroll to the bottom when messages update
@@ -66,7 +71,7 @@ export default function Chat() {
                                             //     msg.target_id === receiverUserId
                                             // }
                                             key={msg.id}
-                                            // name={msg.user.name}
+                                            name={userInfo?.name}
                                             message={msg.message}
                                             time={msg.created_at}
                                         />

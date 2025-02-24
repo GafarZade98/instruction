@@ -17,7 +17,7 @@ const MessageBox = ({ isSent, time, message, user_id }: any) => {
             })}
         >
             <img
-                src={"https://avatar.iran.liara.run/public/" + user_id}
+                src={"https://api.dicebear.com/7.x/bottts/svg?seed="  + user_id}
                 alt="avatar"
                 className={"contact_avatar"}
             />

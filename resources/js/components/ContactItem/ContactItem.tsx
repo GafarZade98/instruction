@@ -6,7 +6,7 @@ const ContactItem = ({ user_id, name }) => {
         <div>
             <div className={"contact_item"}>
                 <img
-                    src={"https://avatar.iran.liara.run/public/" + user_id}
+                    src={"https://api.dicebear.com/7.x/bottts/svg?seed=" + user_id}
                     alt="avatar"
                     className={"contact_avatar"}
                 />

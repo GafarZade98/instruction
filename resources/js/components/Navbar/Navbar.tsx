@@ -16,7 +16,7 @@ const Navbar = () => {
                 <div className={"nav_right"}>
                     <img
                         src={
-                            "https://avatar.iran.liara.run/public/" +
+                            "https://api.dicebear.com/7.x/bottts/svg?seed=" +
                             receiverUserId
                         }
                         alt="avatar"

@@ -25,7 +25,7 @@ class MessageController extends Controller
             'receiver_id' => $request->get('receiver_id'),
         ]);
 
-        MessageSent::broadcast($message)->toOthers();
+        MessageSent::dispatch($message);
 
         return response()->json($message, 201);
     }

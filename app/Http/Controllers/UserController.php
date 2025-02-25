@@ -17,19 +17,19 @@ class UserController extends Controller
 
     public function userMessages(Request $request)
     {
-        $target_id = $request->input('target_id');
+        $receiver_id = $request->input('receiver_id');
         return response()->json([
             'messages' => Message::query()
-                ->where(function ($query) use ($target_id) {
-                    $query->where('user_id', auth()->id())
-                        ->where('target_id', $target_id)
-                        ->orWhere(function ($query) use ($target_id) {
-                            $query->where('user_id', $target_id)
-                                ->where('target_id', auth()->id());
+                ->where(function ($query) use ($receiver_id) {
+                    $query->where('sender_id', auth()->id())
+                        ->where('receiver_id', $receiver_id)
+                        ->orWhere(function ($query) use ($receiver_id) {
+                            $query->where('sender_id', $receiver_id)
+                                ->where('receiver_id', auth()->id());
                         });
                 })
                 ->get(),
-            'user' => User::where('id', $target_id)->first()
+            'user' => User::where('id', $receiver_id)->first()
         ]);
     }
 }

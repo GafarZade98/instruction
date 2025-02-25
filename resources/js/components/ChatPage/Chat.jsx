@@ -22,11 +22,15 @@ export default function Chat() {
     useEffect(() => {
         if (!receiverUserId) return;
 
-        const channel = window.Echo.channel(`chat-${receiverUserId}`);
+        const channel = window.Echo.channel(`chat`);
 
         channel.listen("MessageSent", (e) => {
             setMessage(e.message);
         });
+
+        return () => {
+            channel.stopListening("MessageSent");
+        };
     }, [receiverUserId]);
 
     useEffect(() => {
@@ -37,7 +41,7 @@ export default function Chat() {
 
     const handleGetMessages = async (id) => {
         try {
-            const { data } = await axios.get(`/userMessages?target_id=${id}`);
+            const { data } = await axios.get(`/userMessages?receiver_id=${id}`);
             setMessages(data.messages);
         } catch (error) {
             console.log("Error while fetching messages for user:", error);
@@ -66,16 +70,16 @@ export default function Chat() {
                                     .map(
                                         ({
                                             id,
-                                            user_id,
+                                            sender_id,
                                             message,
                                             created_at,
                                         }) => (
                                             <MessageBox
                                                 key={id}
                                                 isSent={
-                                                    user_id !== receiverUserId
+                                                    sender_id !== receiverUserId
                                                 }
-                                                user_id={user_id}
+                                                sender_id={sender_id}
                                                 message={message}
                                                 time={created_at}
                                             />

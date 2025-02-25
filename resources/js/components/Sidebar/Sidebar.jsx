@@ -24,7 +24,7 @@ const Sidebar = () => {
             {usersList.map((user) => {
                 return (
                     <ContactItem
-                        user_id={user.id}
+                        sender_id={user.id}
                         name={user.name}
                         key={user.id}
                     />

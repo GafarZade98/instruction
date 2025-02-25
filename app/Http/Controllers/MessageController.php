@@ -11,8 +11,8 @@ class MessageController extends Controller
     public function index()
     {
         return Message::with('user')
-            ->where('user_id', auth()->id())
-            ->orWhere('target_id', auth()->id())
+            ->where('sender_id', auth()->id())
+            ->orWhere('receiver_id', auth()->id())
             ->latest()
             ->get();
     }
@@ -21,11 +21,11 @@ class MessageController extends Controller
     {
         $message = $request->user()->messages()->create([
             'message' => strip_tags($request->input('message')),
-            'user_id' => auth()->id(),
-            'target_id' => $request->get('target_id'),
+            'sender_id' => auth()->id(),
+            'receiver_id' => $request->get('receiver_id'),
         ]);
 
-        MessageSent::dispatch($message->load('user'));
+        MessageSent::broadcast($message)->toOthers();
 
         return response()->json($message, 201);
     }

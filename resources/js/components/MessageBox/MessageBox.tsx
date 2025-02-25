@@ -3,7 +3,7 @@ import "./MessageBox.scss";
 import cn from "classnames";
 import { formatMessageTime } from "../../utils/helper";
 
-const MessageBox = ({ isSent, time, message, user_id }: any) => {
+const MessageBox = ({ isSent, time, message, sender_id }: any) => {
     const formattedTime = formatMessageTime(time);
 
     return (
@@ -13,7 +13,7 @@ const MessageBox = ({ isSent, time, message, user_id }: any) => {
             })}
         >
             <img
-                src={"https://api.dicebear.com/7.x/bottts/svg?seed="  + user_id}
+                src={"https://api.dicebear.com/7.x/bottts/svg?seed="  + sender_id}
                 alt="avatar"
                 className={"contact_avatar"}
             />

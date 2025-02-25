@@ -13,7 +13,7 @@ const MessageInput = () => {
         try {
             await axios.post("/messages", {
                 message: text,
-                target_id: receiverUserId,
+                receiver_id: receiverUserId,
             });
             setText("");
         } catch (error) {

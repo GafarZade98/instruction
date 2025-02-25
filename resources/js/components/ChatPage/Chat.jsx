@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import axios from "axios";
-import Sidebar from "../Sidebar/Sidebar";
+import Sidebar from "../Sidebar/Sidebar.jsx";
 import MessageBox from "../MessageBox/MessageBox";
 import Navbar from "../Navbar/Navbar";
 import "./ChatPage.scss";
@@ -10,6 +10,7 @@ import {
     useMessagesState,
     useReceiverUserState,
 } from "../../states/user.state";
+import NoMessages from "../NoMessages/NoMessages";
 
 export default function Chat() {
     const { messages, setMessages, setMessage } = useMessagesState();
@@ -23,12 +24,7 @@ export default function Chat() {
         const channel = window.Echo.channel("chat");
 
         channel.listen("MessageSent", (e) => {
-            if (
-                e.message.target_id === receiverUserId || // Incoming message to me
-                e.message.user_id === receiverUserId // Outgoing message from me
-            ) {
-                setMessage(e.message);
-            }
+            setMessage(e.message);
         });
     }, [receiverUserId]);
 
@@ -36,7 +32,7 @@ export default function Chat() {
         if (receiverUserId) {
             handleGetMessages(receiverUserId);
         }
-    }, [receiverUserId, messages.length]);
+    }, [receiverUserId]);
 
     const handleGetMessages = async (id) => {
         try {
@@ -60,25 +56,34 @@ export default function Chat() {
                     <Sidebar />
 
                     <div className={"main"}>
-                        {receiverUserId ? (
-                            <div className={"messages_list"}>
+                        {!receiverUserId ? (
+                            <NoChatSelected />
+                        ) : messages.length > 0 ? (
+                            <div className="messages_list">
                                 {messages
                                     .sort((a, b) => a.id - b.id)
-                                    .map((msg) => (
-                                        <MessageBox
-                                            isSent={
-                                                msg.user_id !== receiverUserId
-                                            }
-                                            key={msg.id}
-                                            user_id={msg.user_id}
-                                            message={msg.message}
-                                            time={msg.created_at}
-                                        />
-                                    ))}
+                                    .map(
+                                        ({
+                                            id,
+                                            user_id,
+                                            message,
+                                            created_at,
+                                        }) => (
+                                            <MessageBox
+                                                key={id}
+                                                isSent={
+                                                    user_id !== receiverUserId
+                                                }
+                                                user_id={user_id}
+                                                message={message}
+                                                time={created_at}
+                                            />
+                                        ),
+                                    )}
                                 <div ref={messagesEndRef} />
                             </div>
                         ) : (
-                            <NoChatSelected />
+                            <NoMessages />
                         )}
 
                         {receiverUserId && <MessageInput />}

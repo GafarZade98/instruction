@@ -22,6 +22,13 @@ export const useReceiverUserState = create<UserStateType>((set) => ({
 export const useMessagesState = create<useMessagesStateType>((set) => ({
     messages: [],
     setMessage: (val) =>
-        set((state) => ({ messages: [val, ...state.messages] })),
+        set((state) => {
+            // Prevent duplicates
+            if (state.messages.some((msg) => msg.id === val.id)) {
+                return state;
+            }
+            return { messages: [...state.messages, val] };
+        }),
+    //FIXME why do you even need 2 of them?
     setMessages: (val) => set({ messages: val }),
 }));

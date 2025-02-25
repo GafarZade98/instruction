@@ -10,10 +10,11 @@ const MessageInput = () => {
 
     const sendMessage = async (e) => {
         e.preventDefault();
+        // FIXME
         try {
             await axios.post("/messages", {
                 message: text,
-                receiver_id: receiverUserId,
+                // receiver_id: receiverUserId,
             });
             setText("");
         } catch (error) {

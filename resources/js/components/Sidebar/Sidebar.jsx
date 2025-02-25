@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Sidebar.scss";
 import ContactItem from "../ContactItem/ContactItem.jsx";
 import axios from "axios";
+import Navbar from "../Navbar/Navbar.js";
 
 const Sidebar = () => {
     const [usersList, setUsersList] = useState([]);
@@ -21,6 +22,8 @@ const Sidebar = () => {
 
     return (
         <aside className={"sidebar"}>
+            <Navbar />
+
             {usersList.map((user) => {
                 return (
                     <ContactItem

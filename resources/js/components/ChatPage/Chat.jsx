@@ -14,21 +14,17 @@ import {
 export default function Chat() {
     const { messages, setMessages, setMessage } = useMessagesState();
     const { receiverUserId } = useReceiverUserState();
+    const authId = document.getElementById("chat").dataset.authId;
 
     const messagesEndRef = useRef(null);
 
     useEffect(() => {
-        if (!receiverUserId) return; // Ensure a chat is selected
+        if (!receiverUserId) return;
 
-        const channel = window.Echo.channel("chat");
+        const channel = window.Echo.channel(`chat-${receiverUserId}`);
 
         channel.listen("MessageSent", (e) => {
-            if (
-                e.message.target_id === receiverUserId || // Incoming message to me
-                e.message.user_id === receiverUserId // Outgoing message from me
-            ) {
-                setMessage(e.message);
-            }
+            setMessage(e.message);
         });
     }, [receiverUserId]);
 

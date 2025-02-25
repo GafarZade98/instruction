@@ -13,7 +13,7 @@ const MessageBox = ({ isSent, time, message, sender_id }: any) => {
             })}
         >
             <img
-                src={"https://api.dicebear.com/7.x/bottts/svg?seed="  + sender_id}
+                src={"https://api.dicebear.com/7.x/bottts/svg?seed=" + sender_id}
                 alt="avatar"
                 className={"contact_avatar"}
             />

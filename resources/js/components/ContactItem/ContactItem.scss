@@ -22,4 +22,8 @@
         font-size: var(--font-size-sm);
         font-weight: var(--font-weight-bold);
     }
+
+    &.active {
+        background-color: #11050f;
+    }
 }

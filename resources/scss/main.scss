@@ -53,7 +53,7 @@ body {
     background-color: var(--color-secondary);
     background-image: url($bg_image);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     color: var(--color-secondary-light);
     font-family: var(--font-family);
 }

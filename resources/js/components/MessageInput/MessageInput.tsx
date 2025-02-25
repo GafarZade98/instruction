@@ -5,17 +5,17 @@ import { Send } from "lucide-react";
 import { useReceiverUserState } from "../../states/user.state";
 
 const MessageInput = () => {
-    const [message, setMessage] = useState("");
+    const [text, setText] = useState("");
     const { receiverUserId } = useReceiverUserState();
 
     const sendMessage = async (e) => {
         e.preventDefault();
         try {
             await axios.post("/messages", {
-                message,
+                message: text,
                 target_id: receiverUserId,
             });
-            setMessage("");
+            setText("");
         } catch (error) {
             console.log("Error while sending message:", error);
         }
@@ -29,18 +29,14 @@ const MessageInput = () => {
                     name="message"
                     className={"input"}
                     placeholder="Type a message..."
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
                 />
             </div>
-            <button
-                onClick={sendMessage}
-                disabled={!message}
-                className={"submit_btn"}
-            >
+            <button onClick={sendMessage} disabled={!text}>
                 <Send
                     size={22}
-                    color={message ? "var(--color-primary)" : "#44383D"}
+                    color={text ? "var(--color-primary)" : "#44383D"}
                 />
             </button>
         </form>

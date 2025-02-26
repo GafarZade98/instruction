@@ -32,8 +32,8 @@ export default function Chat() {
     const handleGetMessages = async (id) => {
         try {
             const { data } = await axios.get(`/messages`);
-            if (data.messages) {
-                setMessages(data.messages);
+            if (data.data) {
+                setMessages(data.data);
             }
         } catch (error) {
             console.log("Error while fetching messages:", error);
@@ -66,7 +66,9 @@ export default function Chat() {
                                         }) => (
                                             <MessageBox
                                                 key={id}
-                                                isSent={sender_id === authId}
+                                                isSent={
+                                                    sender_id === Number(authId)
+                                                }
                                                 sender_id={sender_id}
                                                 message={message}
                                                 time={created_at}

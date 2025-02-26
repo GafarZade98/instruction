@@ -12,7 +12,7 @@ const MessageInput = () => {
         e.preventDefault();
         // FIXME
         try {
-            await axios.post("/messages", {
+            await axios.post("/send-message", {
                 message: text,
                 // receiver_id: receiverUserId,
             });

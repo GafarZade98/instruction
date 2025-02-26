@@ -10,7 +10,7 @@ class MessageController extends Controller
 {
     public function index()
     {
-        return Message::with('user')->latest()->cursorPaginate(25);
+        return Message::latest()->cursorPaginate(25);
     }
 
     public function store(Request $request)
@@ -18,6 +18,7 @@ class MessageController extends Controller
         $message = $request->user()->messages()->create([
             'message' => strip_tags($request->input('message')),
             'sender_id' => auth()->id(),
+            'name' =>  auth()->user()->name
         ]);
 
         MessageSent::dispatch($message);

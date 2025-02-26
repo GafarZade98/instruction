@@ -15,9 +15,9 @@
         flex-direction: column;
         justify-content: flex-start;
         gap: 5px;
-        .sent_time {
-            font-size: 10px;
-            width: fit-content;
+
+        .user_name {
+            font-size: 13px;
         }
         .message_content {
             background-color: #11050f;
@@ -26,6 +26,11 @@
             border-radius: var(--border-radius-sm);
             font-size: var(--font-size-sm);
         }
+    }
+    .sent_time {
+        font-size: 10px;
+        width: fit-content;
+        align-self: flex-end;
     }
 
     &.received {
@@ -38,8 +43,7 @@
 
     &.sent {
         flex-direction: row-reverse;
-
-        .sent_time {
+        .user_name {
             align-self: flex-end;
         }
     }

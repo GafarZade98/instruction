@@ -3,7 +3,7 @@ import "./MessageBox.scss";
 import cn from "classnames";
 import { formatMessageTime } from "../../utils/helper";
 
-const MessageBox = ({ isSent, time, message, sender_id }: any) => {
+const MessageBox = ({ isSent, time, message, sender_id, name }: any) => {
     const formattedTime = formatMessageTime(time);
 
     return (
@@ -20,9 +20,10 @@ const MessageBox = ({ isSent, time, message, sender_id }: any) => {
                 className={"contact_avatar"}
             />
             <div className={"message_box"}>
-                <div className={"sent_time"}>{formattedTime}</div>
+                <div className={"user_name"}>{name}</div>
                 <p className={"message_content"}>{message}</p>
             </div>
+            <div className={"sent_time"}>{formattedTime}</div>
         </div>
     );
 };

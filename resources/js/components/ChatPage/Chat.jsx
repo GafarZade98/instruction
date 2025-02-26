@@ -63,6 +63,7 @@ export default function Chat() {
                                             sender_id,
                                             message,
                                             created_at,
+                                            name,
                                         }) => (
                                             <MessageBox
                                                 key={id}
@@ -72,6 +73,7 @@ export default function Chat() {
                                                 sender_id={sender_id}
                                                 message={message}
                                                 time={created_at}
+                                                name={name}
                                             />
                                         ),
                                     )}

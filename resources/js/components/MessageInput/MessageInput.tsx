@@ -34,10 +34,10 @@ const MessageInput = () => {
                     onChange={(e) => setText(e.target.value)}
                 />
             </div>
-            <button onClick={sendMessage} disabled={!text}>
+            <button onClick={sendMessage} disabled={!text.trim()}>
                 <Send
                     size={22}
-                    color={text ? "var(--color-primary)" : "#44383D"}
+                    color={text.trim() ? "var(--color-primary)" : "#44383D"}
                 />
             </button>
         </form>
